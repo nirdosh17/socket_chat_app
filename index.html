@@ -5,25 +5,28 @@
     <style>
       * { margin: 0; padding: 0; box-sizing: border-box; }
       body { font: 13px sans-serif; background: #fdeab5; height: 500px;}
-      form { position: fixed; bottom: 5px; width: 100%; }
-      form input { width: 90%; height: 40px; padding-left: 15px; font-size: 15px; }
-      form button { color: white; font-size: 15px; background: #51a1e6; width: 10%; height: 40px; }
-      #messages { list-style-type: none; margin-top: 50px; margin-bottom: 100px;}
+      #msg_input_form { position: fixed; bottom: 5px; width: 100%; }
+      #msg_input_form input { width: 90%; height: 40px; padding-left: 15px; font-size: 15px; }
+      #msg_input_form button { color: white; font-size: 15px; background: #51a1e6; width: 10%; height: 40px; }
+      #messages { list-style-type: none; margin-top: 80px; margin-bottom: 100px;}
       #messages li { padding: 8px 20px; height: 30px; }
       #messages li:nth-child(odd) { background: #5d5b5b; color: white; }
       #username_form { position: fixed; top: 5px; width: 50%; }
       #username_input { width: 35%; height: 30px}
-      #username_submit_button { background: #424040; font-size: 12px; width: 15%; height: 30px; }
+      #username_submit_button { background: #424040; color: white; font-size: 12px; width: 15%; height: 30px; }
+      #typing_status { position: fixed; top: 40px; }
     </style>
   </head>
   <body>
     <div id="container">
+      <div id="typing_status"></div>
       <form id="username_form" action="">
         <p>
         <input id="username_input" autocomplete="off" /><button id="username_submit_button">Set Username</button></p>
       </form>
       <ul id="messages"></ul>
-      <form action="">
+
+      <form id="msg_input_form" action="">
         <input id="msg_input" autocomplete="off" /><button>Send</button>
       </form>
       <!-- loading Socket client -->
@@ -45,6 +48,10 @@
           return false;
         });
 
+        $('#msg_input').bind("keypress", () => {
+          socket.emit('typing');
+        });
+
         $('#username_form').submit(function(){
           var changedUsername = $('#username_input').val();
           socket.emit('change_username', { username: changedUsername });
@@ -53,6 +60,10 @@
         // listen to broadcasted msg and view in the chatbox of all users
         socket.on('chat_message', function(data){
           $('#messages').prepend($('<li>').html('<b>' + data.username + '</b>' + ': ' + data.message));
+        });
+
+        socket.on('typing', function(data){
+          $('#typing_status').html("<p><i>" + data.username + " is typing a message..." + "</p></i>");
         });
 
       });

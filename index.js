@@ -20,6 +20,10 @@ io.on('connection', function(socket){
     socket.username = data.username;
   });
 
+  socket.on('typing', function(data){
+    io.emit('typing', { username: socket.username });
+  });
+
   socket.on('chat_message', function(data){
     // broadcast message received from one user to everyone
     io.emit('chat_message', { username: socket.username, message: data.message });
