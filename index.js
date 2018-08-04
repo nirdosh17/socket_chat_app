@@ -1,8 +1,11 @@
-var app = require('express')();
+var express = require('express');
+var app = express();
 var http = require('http').Server(app);
 
 // initialize new instance of socket passing the http server object
 var io = require('socket.io')(http);
+
+app.use(express.static('public'));
 
 // route handler
 app.get('/', function(req, res){
