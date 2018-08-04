@@ -11,10 +11,18 @@ app.get('/', function(req, res){
 
 // listen on connection event for incoming sockets
 io.on('connection', function(socket){
-  console.log('User connnected');
-  socket.on('chat_message', function(msg){
+  console.log('New user connnected');
+
+  // set default username
+  socket.username = "Anonymous";
+
+  socket.on('change_username', function(data){
+    socket.username = data.username;
+  });
+
+  socket.on('chat_message', function(data){
     // broadcast message received from one user to everyone
-    io.emit('chat_message', msg);
+    io.emit('chat_message', { username: socket.username, message: data.message });
   });
 });
 

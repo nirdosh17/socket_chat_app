@@ -4,41 +4,57 @@
     <title>Socket.IO chat</title>
     <style>
       * { margin: 0; padding: 0; box-sizing: border-box; }
-      body { font: 13px Helvetica, Arial; }
-      form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
-      form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
-      form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
-      #messages { list-style-type: none; margin: 0; padding: 0; }
-      #messages li { padding: 5px 10px; }
-      #messages li:nth-child(odd) { background: #eee; }
+      body { font: 13px sans-serif; background: #fdeab5; height: 500px;}
+      form { position: fixed; bottom: 5px; width: 100%; }
+      form input { width: 90%; height: 40px; padding-left: 15px; font-size: 15px; }
+      form button { color: white; font-size: 15px; background: #51a1e6; width: 10%; height: 40px; }
+      #messages { list-style-type: none; margin-top: 50px; margin-bottom: 100px;}
+      #messages li { padding: 8px 20px; height: 30px; }
+      #messages li:nth-child(odd) { background: #5d5b5b; color: white; }
+      #username_form { position: fixed; top: 5px; width: 50%; }
+      #username_input { width: 35%; height: 30px}
+      #username_submit_button { background: #424040; font-size: 12px; width: 15%; height: 30px; }
     </style>
   </head>
   <body>
-    <ul id="messages"></ul>
-    <form action="">
-      <input id="user_input" autocomplete="off" /><button>Send</button>
-    </form>
-    <!-- loading Socket client -->
+    <div id="container">
+      <form id="username_form" action="">
+        <p>
+        <input id="username_input" autocomplete="off" /><button id="username_submit_button">Set Username</button></p>
+      </form>
+      <ul id="messages"></ul>
+      <form action="">
+        <input id="msg_input" autocomplete="off" /><button>Send</button>
+      </form>
+      <!-- loading Socket client -->
+    </div>
+
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
-    <script>
+    <script type="text/javascript">
       $(function(){
         var socket = io();
 
         // capture user submitted message
         $('form').submit(function(){
-          var input = $('#user_input').val();
+          var input = $('#msg_input').val();
           if (input.length > 0){
-            socket.emit('chat_message', $('#user_input').val());
-            $('#user_input').val('');
+            socket.emit('chat_message', { message: $('#msg_input').val() });
+            $('#msg_input').val('');
           }
           return false;
         });
 
-        // listen to broadcasted msg and view in the chatbox of all users
-        socket.on('chat_message', function(msg){
-          $('#messages').append($('<li>').text(msg));
+        $('#username_form').submit(function(){
+          var changedUsername = $('#username_input').val();
+          socket.emit('change_username', { username: changedUsername });
         });
+
+        // listen to broadcasted msg and view in the chatbox of all users
+        socket.on('chat_message', function(data){
+          $('#messages').prepend($('<li>').html('<b>' + data.username + '</b>' + ': ' + data.message));
+        });
+
       });
     </script>
   </body>
