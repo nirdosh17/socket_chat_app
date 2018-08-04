@@ -11,9 +11,9 @@ app.get('/', function(req, res){
 
 // listen on connection event for incoming sockets
 io.on('connection', function(socket){
-  console.log('User connected.');
-  socket.on('disconnect', function(){
-    console.log('User disconnected.');
+  console.log('User connnected');
+  socket.on('chat_message', function(msg){
+    console.log('Message: ' + msg);
   });
 });
 
