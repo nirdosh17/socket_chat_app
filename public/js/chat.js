@@ -17,9 +17,11 @@ $(function(){
     socket.emit('typing');
   });
 
-  $('#username_form').submit(function(){
+  $('#username_input').focusout(() => {
     var changedUsername = $('#username_input').val();
-    socket.emit('change_username', { username: changedUsername });
+    if (changedUsername.length > 0) {
+      socket.emit('change_username', { username: changedUsername });
+    }
   });
 
   // listen to broadcasted msg and view in the chatbox of all users

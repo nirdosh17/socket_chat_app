@@ -11,7 +11,7 @@ body {
 #msg_input_form {
   position: fixed;
   float: center;
-  bottom: 5px;
+  bottom: 30px;
   left: 5%;
   width: 95%;
 }
@@ -21,7 +21,7 @@ body {
   height: 40px;
   padding-left: 15px;
   font-size: 15px;
-  border: 2px groove;
+  border: 2px groove #969696;
 }
 
 #msg_input_form button {
@@ -59,24 +59,17 @@ body {
 }
 
 #username_input {
-  width: 25%;
+  width: 20%;
   height: 30px;
-  padding-left: 10px;
   margin-left: 10%;
-  border: 2px groove;
-}
-
-#username_submit_button {
-  background: #424040;
-  color: white;
-  font-size: 12px;
-  width: 15%;
-  height: 30px;
+  border: 2px groove #bbbbbb;
+  font-size: 14px;
+  text-align: center;
 }
 
 #typing_status {
   position: fixed;
-  bottom: 45px;
+  bottom: 75px;
   color: #212344;
   margin-left: 4%;
   padding-left: 15px;
