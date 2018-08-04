@@ -29,7 +29,8 @@ $(function(){
   });
 
   socket.on('typing', function(data){
-    $('#typing_status').html("<p><i>" + data.username + " is typing a message..." + "</p></i>");
+    $('#typing_status').html("<p id='feedback_text'><i>" + data.username + " is typing a message..." + "</p></i>");
+    // clear 'is typing...' text after 3 seconds
+    setTimeout(() => { $('#feedback_text').remove(); }, 3000);
   });
-
 });
