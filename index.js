@@ -3,7 +3,7 @@ var http = require('http').Server(app);
 
 // route handler
 app.get('/', function(req, res){
-  res.send("<h1>Hey what's up!!</h1>");
+  res.sendFile(__dirname + '/index.html');
 });
 
 // boot app and keep listening to the port
