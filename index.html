@@ -25,6 +25,7 @@
       $(function(){
         var socket = io();
 
+        // capture user submitted message
         $('form').submit(function(){
           var input = $('#user_input').val();
           if (input.length > 0){
@@ -32,6 +33,11 @@
             $('#user_input').val('');
           }
           return false;
+        });
+
+        // listen to broadcasted msg and view in the chatbox of all users
+        socket.on('chat_message', function(msg){
+          $('#messages').append($('<li>').text(msg));
         });
       });
     </script>

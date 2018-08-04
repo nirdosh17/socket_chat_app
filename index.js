@@ -13,7 +13,8 @@ app.get('/', function(req, res){
 io.on('connection', function(socket){
   console.log('User connnected');
   socket.on('chat_message', function(msg){
-    console.log('Message: ' + msg);
+    // broadcast message received from one user to everyone
+    io.emit('chat_message', msg);
   });
 });
 
