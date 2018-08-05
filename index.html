@@ -6,17 +6,19 @@
   </head>
 
   <body>
-    <div id="container">
-      <div id="typing_status"></div>
-      <form id="username_form" action="">
-        <input id="username_input" autocomplete="off" placeholder="को हौ तिमी ?" />
-      </form>
-      <ul id="messages"></ul>
-
-      <div id="typing_status"></div>
-      <form id="msg_input_form" action="">
-        <input id="msg_input" autocomplete="off" /><button>Send</button>
-      </form>
+    <div class="chatbox">
+      <div class="userinfo">
+        <input id="username_input" autocomplete="off" placeholder="Your Name?" />
+      </div>
+      <div class="chatlogs">
+      </div>
+      <div class="typing-status">&nbsp;</div>
+      <div class="chat-form">
+        <form>
+          <input id="msg_input" autocomplete="off"></input>
+          <button id="send_button">Send</button>
+        </form>
+      </div>
     </div>
 
     <script src="/socket.io/socket.io.js"></script>

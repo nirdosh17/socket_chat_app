@@ -4,7 +4,7 @@ $(function(){
   audioElement.setAttribute('src', 'sounds/notification.mp3');
 
   // capture user submitted message
-  $('form').submit(function(){
+  $('.chat-form form').submit(function(){
     var input = $('#msg_input').val();
     if (input.length > 0){
       socket.emit('chat_message', { message: $('#msg_input').val() });
@@ -26,13 +26,24 @@ $(function(){
 
   // listen to broadcasted msg and view in the chatbox of all users
   socket.on('chat_message', function(data){
-    $('#messages').prepend($('<li>').html('<b>' + data.username + '</b>' + ': ' + data.message));
+    var className = "'chat friend'";
+    var username = data.username;
+    if (username !== 'Anonymous' && username === $('#username_input').val()) {
+      className = "'chat self'";
+      username = 'Me';
+    }
+    var newMessage = "<div class=" + className + ">" +
+                        "<div class='username'>" + username + "</div>" +
+                        "<p class='chat-message'>" + data.message +
+                      "</p></div>";
+
+    $('.chatlogs').prepend(newMessage);
     audioElement.play();
   });
 
   socket.on('typing', function(data){
-    $('#typing_status').html("<p id='feedback_text'><i>" + data.username + " is typing a message..." + "</p></i>");
+    $('.typing-status').html("<p id='feedback_text'><i>" + data.username + " is typing a message..." + "</p></i>");
     // clear 'is typing...' text after 3 seconds
-    setTimeout(() => { $('#feedback_text').remove(); }, 3000);
+    setTimeout(() => { $('#feedback_text').html('<i>&nbsp;</i>'); }, 3000);
   });
 });
