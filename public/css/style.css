@@ -14,7 +14,7 @@
   padding: 25px;
   margin: 20px auto;
   border-radius: 10px;
-  border: 2px groove #b9b7b7;
+  border: 1px solid #c1bcbc;
 }
 
 .userinfo {
@@ -62,19 +62,20 @@
   height: 25px;
   margin: auto;
   overflow: hidden;
-  background: #d46733;
-  color: white;
   border-radius: 10px;
   font-size: 10px;
   text-align: center;
   padding: 5px;
+  border: 1px solid #bdb9b9;
+  background: white;
+  color: black;
 }
 
 .chat .chat-message {
   width: 80%;
-  padding: 15px;
+  padding: 10px 12px;
   margin: 5px 10px 0;
-  border-radius: 5px;
+  border-radius: 10px;
   font-size: 15px;
 }
 
@@ -87,11 +88,6 @@
   background: #0084ff;
   color: #fff;
   order: -1;
-}
-
-.self .username {
-  background: #0084ff;
-  color: #fff;
 }
 
 .chat-form {
@@ -108,24 +104,23 @@
 .chat-form input {
   background: #fbfbfb;
   width: 90%;
-  height: 50px;
   border: 2px solid #eee;
-  border-radius: 3px;
+  border-radius: 6px;
   resize: none;
   padding: 10px;
   font-size: 15px;
+  outline: none;
   color: #797676;
 }
 
 .chat-form button {
   background: #0084ff;
   padding: 5px 15px;
-  margin: 0 10px;
-  border-radius: 3px;
+  margin: 4px 10px;
+  border-radius: 6px;
   font-size: 20px;
   color: #fff;
   border: none;
-  box-shadow: 0 3px 0 #e0dede;
   cursor: pointer;
 }
 
