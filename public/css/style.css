@@ -80,18 +80,17 @@
 }
 
 .friend .chat-message {
-  background: #dedfe2;
-  color: #3d3d46;
+  background: #efa31a;
+  color: #fff;
 }
 
 .self .chat-message {
-  background: #0084ff;
+  background: #4190da;
   color: #fff;
   order: -1;
 }
 
 .chat-form {
-  width: 500px;
   display: flex;
   align-items: flex-start;
   bottom: 30px;
@@ -103,7 +102,7 @@
 
 .chat-form input {
   background: #fbfbfb;
-  width: 90%;
+  width: 100%;
   border: 2px solid #eee;
   border-radius: 6px;
   resize: none;
@@ -111,17 +110,6 @@
   font-size: 15px;
   outline: none;
   color: #797676;
-}
-
-.chat-form button {
-  background: #0084ff;
-  padding: 5px 15px;
-  margin: 4px 10px;
-  border-radius: 6px;
-  font-size: 20px;
-  color: #fff;
-  border: none;
-  cursor: pointer;
 }
 
 .typing-status {
