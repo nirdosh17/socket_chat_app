@@ -3,15 +3,18 @@
   "version": "1.0.0",
   "description": "Simple chat application using Socket.io",
   "main": "index.js",
+  "repository": "https://github.com/nirdosh17/socket_chat_app.git",
   "scripts": {
     "start": "nodemon app",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Nirdosh Gautam <nrdshgtm@gmail.com>",
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.3",
-    "nodemon": "^1.18.3",
     "socket.io": "^2.1.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
   }
 }

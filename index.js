@@ -14,7 +14,8 @@ app.get('/', function(req, res){
 
 // listen on connection event for incoming sockets
 io.on('connection', function(socket){
-  console.log('New user connnected');
+  var address = socket.handshake.address;
+  console.log('New connection from ' + address);
 
   // set default username
   socket.username = "Anonymous";
